@@ -1,9 +1,15 @@
 import mongoose from "mongoose";
 
-const connectionString = process.env.db_link;
+const connectionString = process.env.uri;
 
 export default async function ConnectMongo() {
-    await mongoose.connect(connectionString)
-    .then(() => console.log('Database Connected'))
-    .catch((err) => console.log(err));
-}
+
+    try {
+        await mongoose.connect(connectionString)
+        .then(() => console.log('DB connected'));
+    }
+    catch(err) {
+        console.log(err);
+    }
+
+};
