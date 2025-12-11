@@ -3,7 +3,6 @@
 import React from 'react'
 import ProductCard from './ProductCard';
 import ProductCard2 from './ProductCard2';
-import siteUrl from '@/public/siteUrl';
 import {useEffect, useState} from 'react';
 import Link from 'next/link';
 
@@ -14,7 +13,7 @@ export default function Products() {
     useEffect(() => {
       async function FetchData() {
         try {
-          const res = await fetch(`${siteUrl}/api/products`, {
+          const res = await fetch('/api/products', {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json'

@@ -4,7 +4,6 @@ import React from 'react'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation';
 import dynamic from 'next/dynamic';
-import siteUrl from '@/public/siteUrl';
 
 export default function ReservationForm() {
 
