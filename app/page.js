@@ -1,9 +1,11 @@
 import Products from "@/components/Products";
+import Hero from "@/components/Hero";
+import Temp from "@/components/Temp";
 
 export default function Home() {
   return (
     <>
-    <h1>Restaurant Website Page</h1>
+    <Hero />
     <Products />
     </>
   );
