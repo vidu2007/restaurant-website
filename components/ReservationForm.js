@@ -48,7 +48,7 @@ export default function ReservationForm() {
         console.log(data);
 
         try {
-            const res = await fetch(`${siteUrl}/api/reservations`, {
+            const res = await fetch('/api/reservations', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
