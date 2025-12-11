@@ -1,12 +1,20 @@
 'use client'
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import Link from 'next/link';
 
 export default function RestaurantNavbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const user = useSelector((state) => state.auth.user)
+  const user = useSelector((state) => state.auth.user);
+
+  useEffect(() => {
+    const CheckUser = () => {
+      if(user === null) {
+
+      }
+    }
+  }, [])
 
   const navLinks = [
     { name: 'Home', href: '/' },
@@ -61,8 +69,8 @@ export default function RestaurantNavbar() {
               <Link href='/cart' className="bg-amber-600 hover:bg-amber-700 text-white px-6 py-2 rounded-full font-semibold transition-colors duration-200">
                 Cart
               </Link>
-              <Link href='/sign-in' className="bg-amber-600 hover:bg-amber-700 text-white px-6 py-2 rounded-full font-semibold transition-colors duration-200">
-                Sign In + {user}
+              <Link href={user === null ? '/sign-in' : '/sign-out'} className="bg-amber-600 hover:bg-amber-700 text-white px-6 py-2 rounded-full font-semibold transition-colors duration-200">
+                {user === null ? 'Sign In' : 'Sign Out' }
               </Link>
             </div>
           </div>

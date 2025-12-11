@@ -5,6 +5,7 @@ import { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { setUser } from '@/app/store/authSlice';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { auth } from '@/firebase/config';
 
@@ -63,6 +64,11 @@ export default function SignIn() {
                 <button type='submit' onClick={(e) => handleSignUp(e)} className='w-full bg-amber-800 text-white px-4 py-2 rounded-md hover:bg-amber-900 transition-colors duration-300'>Sign-In</button>
             </div>
         </form>
+
+        <div>
+            <h3 className='text-white text-center'>Don't have an account? <span className='text-amber-200 hover:text-amber-500 transition-colors'> <Link href='/sign-up'>create an account</Link> </span> </h3>
+        </div>
+
     </div>
   )
 }

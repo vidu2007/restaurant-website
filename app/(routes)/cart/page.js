@@ -2,12 +2,24 @@
 
 import React from 'react'
 import { useSelector } from 'react-redux'
+import { useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 import CartProduct from '@/components/CartProduct'  
 
 export default function page() {
 
+    const router = useRouter();
+
     const cartItems = useSelector((state) => state.cart);
+    const user = useSelector((state) => state.auth.user);
     console.log(cartItems);
+
+    useEffect(() => {
+        if(user === null) {
+            alert('Please sign-in to continue');
+            router.push('/sign-in');
+        }
+    }, [])
 
   return (
     <section className='text-black p-0'>
