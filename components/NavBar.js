@@ -7,13 +7,21 @@ import Link from 'next/link';
 export default function RestaurantNavbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const user = useSelector((state) => state.auth.user);
+  const [activeUser, setActiveUser] = useState(false);
 
   useEffect(() => {
     const CheckUser = () => {
       if(user === null) {
-
+        setActiveUser(false);
+      } else {
+        setActiveUser(true);
       }
     }
+
+    const intervalId = setInterval(CheckUser, 3000);
+
+    return () => clearInterval(intervalId);
+
   }, [])
 
   const navLinks = [
@@ -69,8 +77,8 @@ export default function RestaurantNavbar() {
               <Link href='/cart' className="bg-amber-600 hover:bg-amber-700 text-white px-6 py-2 rounded-full font-semibold transition-colors duration-200">
                 Cart
               </Link>
-              <Link href={user === null ? '/sign-in' : '/sign-out'} className="bg-amber-600 hover:bg-amber-700 text-white px-6 py-2 rounded-full font-semibold transition-colors duration-200">
-                {user === null ? 'Sign In' : 'Sign Out' }
+              <Link href={activeUser ? '/sign-out' : '/sign-in'} className="bg-amber-600 hover:bg-amber-700 text-white px-6 py-2 rounded-full font-semibold transition-colors duration-200">
+                {activeUser ? 'Sign Out' : 'Sign In' }
               </Link>
             </div>
           </div>
