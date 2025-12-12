@@ -65,7 +65,7 @@ export default function CartProduct({productName, productPrice, productId, produ
             </div>
         </div>
         <div>
-            <h1 className='text-xl font-bold'>{`Rs.${price}`}</h1>
+            <h1 className='text-xl font-bold'>{`$${price}`}</h1>
         </div>
     </div>
 

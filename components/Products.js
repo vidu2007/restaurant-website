@@ -22,7 +22,8 @@ export default function Products() {
           })
           .then(async (data) => {
             const {productList} = await data.json();
-            setProducts(productList);
+            const products = productList.slice(0, 3);
+            setProducts(products);
             console.log(productList);
           })
         } catch(err) {
