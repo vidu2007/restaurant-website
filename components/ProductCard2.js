@@ -53,7 +53,7 @@ export default function ProductCard2({product}) {
 
             <div className="text-black text-center py-2">
                 <h1 className="text-3xl">{productName}</h1>
-                <p className="text-lg text-wrap text-justify p-4">{description}</p>
+                <p className="text-lg text-wrap text-justify p-4 line-clamp-2">{description}</p>
                 <div className="flex justify-center items-center gap-10">
                     <h3 className="text-2xl font-bold">{`$${price}`}</h3>
                     <button onClick={() => handleAddToCart()} className="text-lg bg-amber-400 py-2 px-4 rounded-3xl hover:text-xl hover:bg-amber-600 duration-300 ease-in-out">Add to Cart</button>
