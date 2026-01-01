@@ -1,18 +1,24 @@
-import { NextResponse } from "next/server"
-import ConnectMongo from "@/libs/mongoConnection"
-import Products from "@/models/productsModel"
+import { NextResponse } from "next/server";
+import { headers } from "next/headers";
+import ConnectMongo from "@/libs/mongoConnection";
+import Products from "@/models/productsModel";
 
-export async function GET() {
+export async function GET(request) {
+    const headersList = await headers();
+    const referer = headersList.get('referer');
+    console.log("Referer:", referer);
+
+    console.log('Main URL:', request.nextUrl.origin);
+
     try { 
         await ConnectMongo();
-        const productList = await Products.find();
-        console.log(productList);
+        const productList = await Products.find().lean();
         return NextResponse.json({productList});
     }
     catch(err) {
         console.log(err);
     }
-}
+};
 
 export async function POST(request) {
     try {
@@ -25,4 +31,4 @@ export async function POST(request) {
     catch(err) {
         console.log(err);
     }
-}
+};
