@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 
 //DNS resolvers to MongoDB SRV records
 //Cloudflare
-// dns.setServers(['1.1.1.1', '1.0.0.1']);
+dns.setServers(['1.1.1.1', '1.0.0.1']);
 
 const connectionString = process.env.uri;
 
