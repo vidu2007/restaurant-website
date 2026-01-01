@@ -7,18 +7,6 @@ dns.setServers(['1.1.1.1', '1.0.0.1']);
 
 const connectionString = process.env.uri;
 
-// export default async function ConnectMongo() {
-
-//     try {
-//         await mongoose.connect(connectionString)
-//         .then(() => console.log('DB connected'));
-//     }
-//     catch(err) {
-//         console.log(err);
-//     }
-
-// };
-
 let cached = global.mongoose;
 
 if(!cached) {
