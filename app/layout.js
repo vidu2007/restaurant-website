@@ -92,7 +92,6 @@ export default async function RootLayout({ children }) {
           {children}
         </main>
         <Footer />
-
       </body>
     </html>
     </Providers>
