@@ -10,14 +10,27 @@ export async function GET(request) {
 
     console.log('Main URL:', request.nextUrl.origin);
 
-    try { 
-        await ConnectMongo();
-        const productList = await Products.find().lean();
-        return NextResponse.json({productList});
+    if (referer == `${request.nextUrl.origin}/`) {
+        try { 
+            await ConnectMongo();
+            const productList = await Products.find().limit(3).lean();
+            return NextResponse.json({productList});
+        }
+        catch(err) {
+            console.log(err);
+        }
+
+    } else {
+        try { 
+            await ConnectMongo();
+            const productList = await Products.find().lean();
+            return NextResponse.json({productList});
+        }
+        catch(err) {
+            console.log(err);
+        }
     }
-    catch(err) {
-        console.log(err);
-    }
+
 };
 
 export async function POST(request) {
