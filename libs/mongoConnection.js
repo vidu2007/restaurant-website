@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-// import dns from 'node:dns/promises';
+import dns from 'node:dns/promises';
 
 //DNS resolvers to MongoDB SRV records
 //Cloudflare
