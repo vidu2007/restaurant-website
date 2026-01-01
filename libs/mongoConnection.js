@@ -7,14 +7,39 @@ dns.setServers(['1.1.1.1', '1.0.0.1']);
 
 const connectionString = process.env.uri;
 
+// export default async function ConnectMongo() {
+
+//     try {
+//         await mongoose.connect(connectionString)
+//         .then(() => console.log('DB connected'));
+//     }
+//     catch(err) {
+//         console.log(err);
+//     }
+
+// };
+
+let cached = global.mongoose;
+
+if(!cached) {
+    cached = global.mongoose = {conn: null, promise: null};
+}
+
 export default async function ConnectMongo() {
+    if(cached.conn) return cached.conn;
 
-    try {
-        await mongoose.connect(connectionString)
-        .then(() => console.log('DB connected'));
-    }
-    catch(err) {
-        console.log(err);
-    }
+    if(!cached.promise) {
+        cached.promise = mongoose.connect(connectionString)
+        .then((mongoose) => {
+            console.log('DB connected');
+            return mongoose;
+        })
+        .catch((err) => {
+            console.log('DB connection error:', err);
+            return null;
+        });
 
+        cached.conn = await cached.promise;
+        return cached.conn;
+    }
 };

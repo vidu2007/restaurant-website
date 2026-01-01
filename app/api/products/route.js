@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { headers } from "next/headers";
+// import { headers } from "next/headers";
 import ConnectMongo from "@/libs/mongoConnection";
 import Products from "@/models/productsModel";
 
@@ -21,7 +21,7 @@ export async function GET(request) {
     //     }
 
     // } else {
-        try { 
+        try {
             await ConnectMongo();
             const productList = await Products.find().lean();
             return NextResponse.json({productList});
@@ -44,5 +44,6 @@ export async function POST(request) {
     }
     catch(err) {
         console.log(err);
+        reutrn NextResponse.json({message: "Error adding product"});
     }
 };
