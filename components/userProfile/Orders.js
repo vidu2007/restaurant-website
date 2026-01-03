@@ -57,7 +57,7 @@ export default function Orders() {
               {/* ORDER ITEMS */}
               <div className="mt-3">
                 {order.order.map((item) => (
-                  <div key={item.cartId + order._id} className=" grid gap-2 grid-cols-1 sm:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr border-b-2 border-zinc-300 px-3 py-3">
+                  <div key={item.cartId + order._id} className=" grid gap-2 grid-cols-1 sm:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr] border-b-2 border-zinc-300 px-3 py-3">
                     <h1 className="font-medium">
                       {item.name}
                     </h1>

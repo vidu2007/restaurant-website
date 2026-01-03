@@ -54,10 +54,9 @@ export default function page() {
 
         <h1 onClick={() => handleTabClick('reservations')} className={` ${activeTab === 'reservations' ? 'bg-white/15' : ''} cursor-pointer text-amber-100 font-bold text-lg lg:text-xl px-4 py-2 rounded-2xl hover:text-black hover:bg-white/80 transition-colors`}>My Reservations</h1>
 
-        <h1 onClick={() => handleTabClick('settings')} className={`${activeTab === 'settings' ? 'bg-white/15' : ''}            cursor-pointer text-amber-100 font-bold text-lg lg:text-xl px-4 py-2 rounded-2xl hover:text-black hover:bg-white/80 transition-colors`}>Settings</h1>
+        <h1 onClick={() => handleTabClick('orders')} className={` ${activeTab === 'orders' ? 'bg-white/15' : ''} cursor-pointer text-amber-100 font-bold text-lg lg:text-xl px-4 py-2 rounded-2xl hover:text-black hover:bg-white/80 transition-colors`}>Orders</h1>
 
-        <h1 onClick={() => handleTabClick('orders')} className={` ${activeTab === 'orders' ? 'bg-white/15' : ''} cursor-pointer text-amber-100 font-bold text-lg lg:text-xl px-4 py-2 rounded-2xl hover:text-black hover:bg-white/80 transition-colors`}
-        >Orders</h1>
+        <h1 onClick={() => handleTabClick('settings')} className={`${activeTab === 'settings' ? 'bg-white/15' : ''}            cursor-pointer text-amber-100 font-bold text-lg lg:text-xl px-4 py-2 rounded-2xl hover:text-black hover:bg-white/80 transition-colors`}>Settings</h1>
 
         <Link href="/sign-out" className="text-red-400 font-bold text-lg lg:text-xl px-4 py-2 rounded-2xl hover:text-black hover:bg-red-500/80 transition-colors">Log out</Link>
       </aside>
