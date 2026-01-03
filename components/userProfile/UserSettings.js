@@ -69,7 +69,7 @@ export default function UserSettings() {
     };
 
   return (
-    <section className='px-5 py-2'>
+    <section className='px-5 py-2 text-amber-100'>
 
         {popup ? <PopupMessage title={popupTitle} message={popupMessage} CloseFunc={() => setPopup(false)} /> : null}
 
@@ -78,31 +78,31 @@ export default function UserSettings() {
         </div>
         <form onSubmit={(e) => handleUserUpdate(e)}>
             <div className="mb-4">
-                <label htmlFor="UserName" className="block text-lg font-medium text-white mb-2">Username</label>
+                <label htmlFor="UserName" className="block text-lg font-medium mb-2">Username</label>
 
                 <input type="text" value={userName} onChange={(e) => setUserName(e.target.value)} required placeholder='Lewis Hamilton' maxLength={30} id="UserName" name="userName" className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"/>
             </div>
 
             <div className="mb-4">
-                <label htmlFor="eMail" className="block text-lg font-medium text-white mb-2">E-mail</label>
+                <label htmlFor="eMail" className="block text-lg font-mediummb-2">E-mail</label>
 
-                <input type='email' value={user.userEmail} readOnly maxLength={30} id="eMail" name="email" className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-white placeholder-text-white"/>
+                <input type='email' value={user.userEmail} readOnly maxLength={30} id="eMail" name="email" className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"/>
             </div>
 
             <div className="mb-4">
-                <label htmlFor="password" className="block text-lg font-medium text-white mb-2">Password</label>
+                <label htmlFor="password" className="block text-lg font-medium mb-2">Password</label>
 
-                <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder='password' maxLength={30} id="password" name="password" className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-white placeholder-text-white"/>
+                <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder='password' maxLength={30} id="password" name="password" className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"/>
             </div>
 
             <div className="mb-4">
-                <label htmlFor="confirmPassword" className="block text-lg font-medium text-white mb-2">Confirm Password</label>
+                <label htmlFor="confirmPassword" className="block text-lg font-medium b-2">Confirm Password</label>
 
-                <input value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} type="password" placeholder='confirm password' maxLength={30} id="confirmPassword" name="confirmPassword" className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-white placeholder-text-white"/>
+                <input value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} type="password" placeholder='confirm password' maxLength={30} id="confirmPassword" name="confirmPassword" className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"/>
             </div>
 
             <div className="mb-4">
-                <button type='submit' className='w-1/4 bg-amber-800 text-white px-4 py-2 rounded-md hover:bg-amber-950 transition-colors duration-300'>{isLoading ? 'Please wait...' : 'Update the profile'}</button>
+                <button type='submit' className='w-3/4 lg:w-1/4 bg-amber-800 px-4 py-2 rounded-md hover:bg-amber-950 transition-colors duration-300'>{isLoading ? 'Please wait...' : 'Update the profile'}</button>
             </div>
         </form>
     </section>

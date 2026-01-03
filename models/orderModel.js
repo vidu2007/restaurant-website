@@ -7,7 +7,7 @@ const orderSchema = new Schema({
         select: false
     },
     order: {
-        type: [[]],
+        type: Array,
         required: true,
     },
     status: {
