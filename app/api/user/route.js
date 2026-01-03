@@ -59,13 +59,13 @@ export async function PUT(request) {
         if(!password) {
             const updatedUser = await Users.findByIdAndUpdate(id, {userName: userName}, {new: true});
             console.log('updatedUser', updatedUser);
-            return NextResponse.json({updatedUser});
+            return NextResponse.json({updatedUser, message: 'Update Successful'});
 
         } else {
             const encryptPassword = await bcrypt.hash(password, 13);
             const updatedUser = await Users.findByIdAndUpdate(id, {userName: userName, password: encryptPassword}, {new: true});
             console.log('updatedUser', updatedUser);
-            return NextResponse.json({updatedUser});
+            return NextResponse.json({updatedUser, message: 'Update Successful'});
         }
 
     } catch(err) {

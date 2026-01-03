@@ -4,7 +4,7 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux';
 import { useRouter } from 'next/navigation';
-import dynamic from 'next/dynamic';
+import PopupMessage from './popupNotifications/PopupMessage';
 
 export default function ReservationForm() {
 
@@ -32,11 +32,11 @@ export default function ReservationForm() {
         }
     }, [])
 
-    const PopupMessage = dynamic(() => import('./popupNotifications/PopupMessage'), {
-        loading: () => <p>Loading...</p>,
-        ssr: false,
-        error: (err) => <p>Error loading popup</p>,
-    });
+    // const PopupMessage = dynamic(() => import('./popupNotifications/PopupMessage'), {
+    //     loading: () => <p>Loading...</p>,
+    //     ssr: false,
+    //     error: (err) => <p>Error loading popup</p>,
+    // });
 
     const data = {
         userId: user.userId,

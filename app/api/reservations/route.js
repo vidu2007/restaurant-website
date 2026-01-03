@@ -12,7 +12,7 @@ export async function POST(request) {
         const {userId, title, reservationName, contactNumber, date, time, guests, notes} = data;
 
         console.log('from server', userId, title, reservationName, contactNumber, date, time, guests, notes);
-        const newReservation = await Reservations.create({userId, title, reservationName, contactNumber, date, time, guests, notes, status: false});
+        const newReservation = await Reservations.create({userId, title, reservationName, contactNumber, date, time, guests, notes, status: false, isCanceled: false});
 
         console.log(newReservation);
         return NextResponse.json({message: "Your request was received. We'll inform you once it's confirmed. Thank you!", title: "Reservation Request Received"});
@@ -34,7 +34,7 @@ export async function GET(request) {
         console.log('Payload from token:', payload);
     
         await ConnectMongo();
-        const reservations = await Reservations.find({userId: payload.userId, status: !'canceled'}).lean();
+        const reservations = await Reservations.find({userId: payload.userId, isCanceled: false}).lean();
         return NextResponse.json({reservations, message: "Reservations fetched successfully"});
 
     } catch(err) {
@@ -48,7 +48,7 @@ export async function DELETE(request) {
         const {reservationId} = await request.json();
         await ConnectMongo();
         console.log('reservation cancel');
-        const canceledReservation = await Reservations.findByIdAndUpdate(reservationId, {status: 'canceled'}, {new: true});
+        const canceledReservation = await Reservations.findByIdAndUpdate(reservationId, {isCanceled: true}, {new: true});
 
         console.log('Canceled reservation:', canceledReservation);
         return NextResponse.json({message: "Reservation canceled successfully", canceledReservation});

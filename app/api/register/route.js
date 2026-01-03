@@ -2,8 +2,13 @@ import bcrypt from 'bcrypt';
 import Users from '@/models/userModel';
 import ConnectMongo from '@/libs/mongoConnection';
 import { NextResponse } from 'next/server';
+import { cookies } from 'next/headers';
+import { SignJWT } from 'jose';
 
 export async function POST(request) {
+
+    const cookieStore = await cookies();
+
     const {email, password, userName} = await request.json();
 
     await ConnectMongo();
@@ -31,10 +36,23 @@ export async function POST(request) {
             const encryptPassword = await bcrypt.hash(password, 13);
     
             const newUser = await Users.create({email: email, password: encryptPassword, userName: userName})
-            .then(() => {
-                console.log('user created');
-                return NextResponse.json({message: "User created successfully"});
-            });
+            console.log('user created');
+
+            const jwtSecret = new TextEncoder().encode(process.env.SECRET);
+            const token = await new SignJWT({userId: newUser._id.toString()}).setProtectedHeader({alg: "HS256"}).setExpirationTime('1h').sign(jwtSecret);
+
+            cookieStore.set({
+                name: 'AuthToken',
+                httpOnly: true,
+                maxAge: 3600,
+                value: token,
+                path: '/',
+                secure: process.env.NODE_ENV === 'production',
+                sameSite: 'lax',
+            })
+
+            return NextResponse.json({message: 'Profile registered successfully', userId: newUser._id, userName: newUser.userName, userEmail: newUser.email});
+            
         }
 
 

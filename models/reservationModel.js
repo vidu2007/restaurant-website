@@ -34,7 +34,12 @@ const reservationSchema = new Schema({
         type: String
     },
     status: {
-        type: Boolean
+        type: Boolean,
+        default: false
+    },
+    isCanceled: {
+        type: Boolean,
+        default: false
     }
     
 }, {timestamps: true});

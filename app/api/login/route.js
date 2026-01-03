@@ -45,15 +45,6 @@ export async function POST(request) {
             sameSite: 'lax',
         });
 
-        // response.cookies.set({
-        //     name: 'AuthToken',
-        //     value: token,
-        //     path: '/',
-        //     httpOnly: true,
-        //     maxAge: 3600,
-        //     secure: false
-        // });
-
         return NextResponse.json({userName: user.userName, userId: user._id.toString(), userEmail: user.email, message: 'Login successful'});
 
     } catch(err) {

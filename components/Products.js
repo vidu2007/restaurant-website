@@ -4,9 +4,11 @@ import React from 'react'
 import ProductCard2 from './ProductCard2';
 import {useEffect, useState} from 'react';
 import Link from 'next/link';
+import LoaderSpin from './LoaderSpin';
 
 export default function Products() {
 
+  const [isLoading, setIsLoading] = useState(true);
   const [products, setProducts] = useState([]);
 
     useEffect(() => {
@@ -15,6 +17,7 @@ export default function Products() {
           const res = await fetch('/api/products')
           .then(async (data) => {
             const {productList} = await data.json();
+            setIsLoading(false);
             setProducts(productList);
           })
         } catch(err) {
@@ -71,7 +74,10 @@ export default function Products() {
 
   return (
     <div className='flex flex-col gap-5'>
-      <div className='grid auto-rows-fr grid-cols-1 md:grid-cols-2 lg:grid-cols-3 px-4 py-3 gap-4 justify-center items-center bg-amber-950'>
+      <div className={`${isLoading ? 'block' : 'grid'} auto-rows-fr grid-cols-1 md:grid-cols-2 lg:grid-cols-3 px-4 py-3 gap-4 justify-center items-center bg-amber-950`}>
+        {
+          isLoading ? <LoaderSpin /> : null
+        }
         {
           products.map((product) => (
             <ProductCard2 key={product._id} product={product}/>

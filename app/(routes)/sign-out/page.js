@@ -4,7 +4,6 @@ import React from "react";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
-import { clearUser } from "@/app/store/authSlice";
 
 export default function page() {
     const dispatch = useDispatch();
@@ -20,7 +19,7 @@ export default function page() {
                     cache: "no-store",
                 })
                 .then(() => {
-                    dispatch(clearUser());
+                    dispatch({type: 'GLOBAL_RESET'});
                     router.push('/');
                 })
 

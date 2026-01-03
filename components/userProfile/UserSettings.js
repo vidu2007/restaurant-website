@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setUser } from '@/app/store/authSlice';
+import PopupMessage from '@/components/popupNotifications/PopupMessage';
 
 export default function UserSettings() {
 
@@ -11,12 +12,18 @@ export default function UserSettings() {
 
     console.log(user, 'from user settings component');
 
+    const [isLoading, setIsLoading] = useState(false);
+    const [popup, setPopup] = useState(false);
+    const [popupMessage, setPopupMessage] = useState('');
+    const [popupTitle, setPopupTitle] = useState('');
+
     const [userName, setUserName] = useState(user.userName);
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
 
     const handleUserUpdate = async (e) => {
         e.preventDefault();
+        setIsLoading(true);
 
         if(password === confirmPassword) {
             try {
@@ -33,11 +40,24 @@ export default function UserSettings() {
                     }),
                 });
 
-                const {updatedUser} = await newUser.json();
+                const {updatedUser, message} = await newUser.json();
 
                 console.log(updatedUser);
-    
-                dispatch(setUser({userId: updatedUser._id, userName: updatedUser.userName, userEmail: updatedUser.email}));
+
+                if(message === 'Update Successful') {
+                    dispatch(setUser({userId: updatedUser._id, userName: updatedUser.userName, userEmail: updatedUser.email}));
+                    setPopupTitle('Success');
+                    setPopupMessage('Profile updated successfully');
+
+                } else {
+                    setPopupTitle('Error during update');
+                    setPopupMessage('There was an error updating your profile. Please try again.');
+                }
+                
+                setPassword('');
+                setConfirmPassword('');
+                setPopup(true);
+                setIsLoading(false);
     
             } catch(err) {
                 console.log(err);
@@ -46,12 +66,13 @@ export default function UserSettings() {
         } else {
             alert('Passwords do not match');
         }
-
-
     };
 
   return (
     <section className='px-5 py-2'>
+
+        {popup ? <PopupMessage title={popupTitle} message={popupMessage} CloseFunc={() => setPopup(false)} /> : null}
+
         <div>
             <h1 className='text-center text-2xl font-bold'>Settings</h1>
         </div>
@@ -81,7 +102,7 @@ export default function UserSettings() {
             </div>
 
             <div className="mb-4">
-                <button type='submit' className='w-1/4 bg-amber-800 text-white px-4 py-2 rounded-md hover:bg-amber-950 transition-colors duration-300'>Update the profile</button>
+                <button type='submit' className='w-1/4 bg-amber-800 text-white px-4 py-2 rounded-md hover:bg-amber-950 transition-colors duration-300'>{isLoading ? 'Please wait...' : 'Update the profile'}</button>
             </div>
         </form>
     </section>

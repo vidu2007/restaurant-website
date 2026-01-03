@@ -10,6 +10,7 @@ export async function GET(request) {
 
     console.log('Main URL:', request.nextUrl.origin);
 
+    //To fetch limited products for homepage
     if (referer == `${request.nextUrl.origin}/`) {
         try { 
             await ConnectMongo();

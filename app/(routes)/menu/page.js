@@ -3,8 +3,10 @@
 import React from 'react'
 import {useState, useEffect} from 'react'
 import ProductCard2 from '@/components/ProductCard2'
+import LoaderSpin from '@/components/LoaderSpin'
 
 export default function page() {
+  const [isLoading, setIsLoading] = useState(true);
   const [productList, setProductList] = useState([]);
 
   useEffect(() => {
@@ -19,6 +21,7 @@ export default function page() {
 
       const productData =  await res.json();
       console.log(productData);
+      setIsLoading(false);
       setProductList(productData.productList);
     };
 
@@ -73,7 +76,10 @@ export default function page() {
       <div>
         <h1 className='text-4xl font-bold text-center py-6 bg-amber-950 text-amber-200'>Our Menu</h1>
       </div>
-      <div className='grid auto-rows-fr grid-cols-1 md:grid-cols-2 lg:grid-cols-3 px-4 py-3 gap-4 justify-center items-center bg-amber-950'>
+      <div className={`${isLoading ? 'block' : 'grid'} auto-rows-fr grid-cols-1 md:grid-cols-2 lg:grid-cols-3 px-4 py-3 gap-4 justify-center items-center bg-amber-950`}>
+        {
+          isLoading ? <LoaderSpin /> : null
+        }
         {
           productList.map((product) => (
             <ProductCard2 key={product._id} product={product} />

@@ -1,4 +1,4 @@
-'use client'
+"use client"
 
 import React from 'react';
 
@@ -9,7 +9,7 @@ export default function PopupMessage({title, message, CloseFunc}) {
         <div style={{backgroundColor: 'rgba(133, 47, 28, 52)'}} className='flex flex-col w-3/4 md:w-1/2 rounded-lg lg:rounded-2xl border-white border-2 px-5 py-3 md:py-5 justify-center items-center gap-2 md:gap-5'>
             <h1 className='text-lg md:text-xl text-white font-bold'>{`${title}`}</h1>
             <p className='text-md: md:text-lg text-center text-white'>{`${message}`}</p>
-            <button onClick={() => CloseFunc()} style={{backgroundColor: 'rgba(216, 63, 32, 85)'}} className='text-lg md:text-xl rounded-md border-zinc-950 py-1 px-4'>OK</button>
+            <button onClick={() => CloseFunc()} autoFocus style={{backgroundColor: 'rgba(216, 63, 32, 85)'}} className='text-lg md:text-xl rounded-md border-zinc-950 py-1 px-4'>OK</button>
         </div>
     </div>
-)}
+)};

@@ -3,9 +3,11 @@
 import React from 'react'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
+import LoaderSpin from '../LoaderSpin'
 
 export default function Reservations() {
 
+  const [isLoading, setIsLoading] = useState(true);
   const [reservations, setReservations] = useState([]);
   const [triggerCount, setTriggerCount] = useState(0);
 
@@ -19,6 +21,7 @@ export default function Reservations() {
 
         const data = await res.json();
         setReservations(data.reservations);
+        setIsLoading(false);
         console.log(data);
 
       } catch(err) {
@@ -62,14 +65,16 @@ export default function Reservations() {
   // ]
 
   return (
-    <section className='px-3 py-3'>
+    <section className='p-3'>
       <div>
         <h1 className='text-center text-2xl font-bold'>Reservations</h1>
         <Link href="/reservations" className='text-right text-lg block'>New reservation</Link>
       </div>
       <div className='flex flex-col gap-5 py-5 px-1'>
 
-         {reservations.length === 0 ? (<h1 className='text-2xl text-center'>No reservations found</h1>) : null}
+        {isLoading ? (<LoaderSpin />) : null}
+
+        {reservations.length === 0 && !isLoading ? (<h1 className='text-2xl text-center'>No reservations found</h1>) : null}
 
         {reservations.map((item) => (
 

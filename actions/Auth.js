@@ -9,3 +9,9 @@ export async function LogOutUser() {
     // redirect('/');
     return;
 }
+
+export async function DeleteAuthMessage() {
+    const cookieStore = await cookies();
+    cookieStore.delete('AuthMsg');
+    redirect('/sign-in');
+}

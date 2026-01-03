@@ -2,10 +2,15 @@
 
 import react from 'react'
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { addToCart } from '@/app/store/cartSlice';
+import PopupMessage from './popupNotifications/PopupMessage';
 
 export default function ProductCard2({product}) {
+
+    const [popup, setPopup] = useState(false);
+    const [popupTitle, setPopupTitle] = useState('');
 
     const user = useSelector((state) => state.auth.user);
     const cartList = useSelector((state) => state.cart);
@@ -15,12 +20,14 @@ export default function ProductCard2({product}) {
     const {image, productName, description, price} = product;
 
     const handleAddToCart = () => {
+        setPopup(true);
+
         if(user === null) {
-            alert('Please sign in to add items to your cart.');
-            router.push('/sign-in');
+            setPopupTitle('Please sign-in to add items to your cart.');
+
         } else {
             const setProduct = {
-                cartId: cartList.length,
+                cartId: (Math.random()*12853).toFixed() + Date.now().toString().slice(-5),
                 name: productName,
                 price: price,
                 quantity: 1,
@@ -28,24 +35,21 @@ export default function ProductCard2({product}) {
                 image: image
             }
             dispatch(addToCart(setProduct));
-            alert('Item added to cart!');
+            setPopupTitle('Item Added to cart');
         }
+    }
 
-        // const setProduct = {
-        //         cartId: Date.now().toString(36),
-        //         name: productName,
-        //         price: price,
-        //         quantity: 1,
-        //         description: description,
-        //         image: image
-        // }
-
-        // dispatch(addToCart(setProduct));
-        // alert('Item added to cart!');
+    const ClosePopup = () => {
+        if(user === null) {
+            router.push('/sign-in');
+        }
+        setPopup(false);
     }
 
     return(
         <div className="w-full h-96 px-3 py-4 bg-amber-700 flex flex-col items-center justify-center gap-5 rounded-4xl shadow-lg hover:shadow-2xl transition-shadow duration-300 ease-in-out">
+
+            { popup ? <PopupMessage title={popupTitle} message='' CloseFunc={() => ClosePopup()} /> : null }
 
             <div className="w-2/3 h-48 rounded-4xl overflow-hidden object-cover">
                 <img src={image} alt={productName} width={960} height={540} className="object-cover w-full h-full"/>
