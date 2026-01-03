@@ -9,6 +9,7 @@ import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
 import Users from '@/models/userModel';
 import AuthStoreInitializer from '@/components/auth/AuthStoreInitializer';
+import { GoogleAnalytics } from '@next/third-parties/google'
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -79,6 +80,7 @@ export default async function RootLayout({ children }) {
 
 
   return (
+    
     <Providers>
 
         {/* Existing user authentication */}
@@ -94,6 +96,10 @@ export default async function RootLayout({ children }) {
         <Footer />
       </body>
     </html>
+
+    <GoogleAnalytics gaId={process.env.GA4_STRING} />
     </Providers>
+
+
   );
 }
