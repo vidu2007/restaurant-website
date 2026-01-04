@@ -17,7 +17,7 @@ export async function proxy(request) {
             name: 'AuthMsg',
             value: 'Please sign-in to continue',
             path: '/',
-            maxAge: 500,
+            maxAge: 100,
             sameSite: 'lax',
             secure: process.env.NODE_ENV === 'production',
             httpOnly: true,

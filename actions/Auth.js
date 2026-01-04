@@ -15,7 +15,9 @@ export async function ReadAuthMessage() {
     // console.log(cookieStore.get('AuthMsg').value, 'from Auth.js')
 
     try {
-        return cookieStore.get('AuthMsg').value;
+        const message = cookieStore.get('AuthMsg').value;
+        console.log(message, 'from Auth.js');
+        return message;
     } catch(err) {
         // console.log(err);
         return '';
