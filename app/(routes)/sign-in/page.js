@@ -1,16 +1,18 @@
 "use client"
 
-import React, { Suspense } from 'react'
-import { useState } from 'react'
+import React from 'react'
+import { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux';
 import { setUser } from '@/app/store/authSlice';
 import { useRouter } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import PopupMessage from '@/components/popupNotifications/PopupMessage';
-import AuthMessage from '@/components/auth/AuthMessage';
+// import AuthMessage from '@/components/auth/AuthMessage';
 
 export default function SignIn() {
 
+    const searchParams = useSearchParams();
     const dispatch = useDispatch();
 
     const [popup, setPopup] = useState(false);
@@ -24,6 +26,16 @@ export default function SignIn() {
 
     const router = useRouter();
 
+    const AuthMessage = searchParams.get('message');
+
+    useEffect(()=> {
+        if(AuthMessage === 'unauthorized'){
+            setPopupTitle('Please sign-in to continue');
+            setPopup(true);
+        }
+
+    }, [searchParams])
+
     const PopupClose = () => {
         setPopup(false);
         
@@ -34,7 +46,6 @@ export default function SignIn() {
             setPopupMessage('');
             setPopupTitle('');
             setIsLoading(false);
-            router.refresh();
         }
     }
 
@@ -89,7 +100,7 @@ export default function SignIn() {
   return (
     <div>
 
-        <Suspense><AuthMessage /></Suspense>
+        {/* <Suspense><AuthMessage /></Suspense> */}
         
         { popup ? <PopupMessage title={popupTitle} message={popupMessage} CloseFunc={() => PopupClose()} /> : null }
 

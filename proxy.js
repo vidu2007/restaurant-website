@@ -13,17 +13,17 @@ export async function proxy(request) {
     const token = request.cookies.get('AuthToken')?.value;
 
     if(!isPublicPath && !token) {
-        cookieStore.set({
-            name: 'AuthMsg',
-            value: 'Please sign-in to continue',
-            path: '/',
-            maxAge: 100,
-            sameSite: 'lax',
-            secure: process.env.NODE_ENV === 'production',
-            httpOnly: true,
-        });
+        // cookieStore.set({
+        //     name: 'AuthMsg',
+        //     value: 'Please sign-in to continue',
+        //     path: '/',
+        //     maxAge: 100,
+        //     sameSite: 'lax',
+        //     secure: process.env.NODE_ENV === 'production',
+        //     httpOnly: true,
+        // });
 
-        return NextResponse.redirect(new URL('/sign-in', request.url));
+        return NextResponse.redirect(new URL('/sign-in?message=unauthorized', request.url));
 
     } else if(token) {
         try {
