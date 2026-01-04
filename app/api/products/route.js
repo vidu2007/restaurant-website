@@ -14,7 +14,7 @@ export async function GET(request) {
     if (referer == `${request.nextUrl.origin}/`) {
         try { 
             await ConnectMongo();
-            const productList = await Products.find().limit(3).lean();
+            const productList = await Products.find().sort({_id: -1}).limit(3).lean();
             return NextResponse.json({productList});
         }
         catch(err) {
@@ -24,7 +24,7 @@ export async function GET(request) {
     } else {
         try {
             await ConnectMongo();
-            const productList = await Products.find().lean();
+            const productList = await Products.find().sort({_id: -1}).lean();
             return NextResponse.json({productList});
         }
         catch(err) {
