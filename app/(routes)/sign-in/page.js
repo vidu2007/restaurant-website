@@ -4,11 +4,9 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux';
 import { setUser } from '@/app/store/authSlice';
-import { useRouter } from 'next/navigation';
-import { useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import PopupMessage from '@/components/popupNotifications/PopupMessage';
-// import AuthMessage from '@/components/auth/AuthMessage';
 
 export default function SignIn() {
 
@@ -34,7 +32,7 @@ export default function SignIn() {
             setPopup(true);
         }
 
-    }, [searchParams])
+    }, [AuthMessage])
 
     const PopupClose = () => {
         setPopup(false);
