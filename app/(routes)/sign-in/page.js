@@ -10,7 +10,9 @@ import PopupMessage from '@/components/popupNotifications/PopupMessage';
 
 export default function SignIn() {
 
+    const router = useRouter();
     const searchParams = useSearchParams();
+
     const dispatch = useDispatch();
 
     const [popup, setPopup] = useState(false);
@@ -22,17 +24,16 @@ export default function SignIn() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const router = useRouter();
-
     const AuthMessage = searchParams.get('message');
 
     useEffect(()=> {
         if(AuthMessage === 'unauthorized'){
             setPopupTitle('Please sign-in to continue');
+            router.replace('/sign-in');
             setPopup(true);
         }
 
-    }, [AuthMessage])
+    }, [searchParams]);
 
     const PopupClose = () => {
         setPopup(false);
