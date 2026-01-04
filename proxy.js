@@ -19,8 +19,8 @@ export async function proxy(request) {
             path: '/',
             maxAge: 500,
             sameSite: 'lax',
-            secure: true,
-            httpOnly: false,
+            secure: process.env.NODE_ENV === 'production',
+            httpOnly: true,
         });
 
         return NextResponse.redirect(new URL('/sign-in', request.url));
