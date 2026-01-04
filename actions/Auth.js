@@ -12,7 +12,14 @@ export async function LogOutUser() {
 
 export async function ReadAuthMessage() {
     const cookieStore = await cookies();
-    return cookieStore.get('AuthMsg').value;
+    // console.log(cookieStore.get('AuthMsg').value, 'from Auth.js')
+
+    try {
+        return cookieStore.get('AuthMsg').value;
+    } catch(err) {
+        // console.log(err);
+        return '';
+    }
 }
 
 export async function DeleteAuthMessage() {

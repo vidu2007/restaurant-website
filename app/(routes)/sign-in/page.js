@@ -1,4 +1,4 @@
-'use client'
+"use client"
 
 import React, { Suspense } from 'react'
 import { useState } from 'react'
@@ -89,7 +89,7 @@ export default function SignIn() {
   return (
     <div>
 
-        <Suspense> <AuthMessage /> </Suspense>
+        <Suspense><AuthMessage /></Suspense>
         
         { popup ? <PopupMessage title={popupTitle} message={popupMessage} CloseFunc={() => PopupClose()} /> : null }
 

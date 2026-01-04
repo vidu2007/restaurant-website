@@ -6,6 +6,7 @@ import { usePathname, useSearchParams } from 'next/navigation';
 import { getCookie } from 'cookies-next';
 import dynamic from 'next/dynamic';
 import { DeleteAuthMessage, ReadAuthMessage } from '@/actions/Auth';
+// import PopupMessage from '../popupNotifications/PopupMessage';
 
 export default function AuthMessage() {
     const pathName = usePathname();
@@ -18,21 +19,21 @@ export default function AuthMessage() {
     
     useEffect(() => {
 
-      function GetMessage() {
+      async function GetMessage() {
         // const authMessage = getCookie('AuthMsg') || null;
-        const authMessage = ReadAuthMessage();
+        const authMessage = await ReadAuthMessage();
         setPopup(true);
         setAuthMsg(authMessage);
       }
 
       GetMessage();
 
-    }, [pathName, searchParams]);
+    }, [searchParams, pathName]);
 
-    const handleClose = () => {
-        DeleteAuthMessage();
-        setAuthMsg('');
-        setPopup(false);
+    const handleClose = async () => {
+      setPopup(false);
+      setAuthMsg('');
+      await DeleteAuthMessage();
     }
 
   return (
