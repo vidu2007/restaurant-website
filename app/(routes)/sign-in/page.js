@@ -29,8 +29,8 @@ export default function SignIn() {
     useEffect(()=> {
         if(AuthMessage === 'unauthorized'){
             setPopupTitle('Please sign-in to continue');
-            router.replace('/sign-in');
             setPopup(true);
+            router.replace('/sign-in');
         }
 
     }, [searchParams]);
