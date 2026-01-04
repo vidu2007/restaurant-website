@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { getCookie } from 'cookies-next';
 import dynamic from 'next/dynamic';
-import { DeleteAuthMessage } from '@/actions/Auth';
+import { DeleteAuthMessage, ReadAuthMessage } from '@/actions/Auth';
 
 export default function AuthMessage() {
     const pathName = usePathname();
@@ -17,9 +17,15 @@ export default function AuthMessage() {
     
     
     useEffect(() => {
-        const authMessage = getCookie('AuthMsg') || null;
+
+      function GetMessage() {
+        // const authMessage = getCookie('AuthMsg') || null;
+        const authMessage = ReadAuthMessage();
         setPopup(true);
         setAuthMsg(authMessage);
+      }
+
+      GetMessage();
 
     }, [pathName, searchParams]);
 

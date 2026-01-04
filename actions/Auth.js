@@ -10,6 +10,11 @@ export async function LogOutUser() {
     return;
 }
 
+export async function ReadAuthMessage() {
+    const cookieStore = await cookies();
+    return cookieStore.get('AuthMsg').value;
+}
+
 export async function DeleteAuthMessage() {
     const cookieStore = await cookies();
     cookieStore.delete('AuthMsg');
