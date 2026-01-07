@@ -2,7 +2,7 @@ export default function Hero() {
   return (
     <section className="relative bg-amber-950 text-amber-50 overflow-hidden">
       {/* Background Image with Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-r from-amber-950/95 via-amber-950/85 to-amber-950/70 z-10"></div>
+      <div className="absolute inset-0 bg-linear-to-r from-amber-950/95 via-amber-950/85 to-amber-950/70 z-10"></div>
       <div 
         className="absolute inset-0 bg-cover bg-center"
         style={{
