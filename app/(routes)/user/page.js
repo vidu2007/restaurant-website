@@ -18,7 +18,7 @@ const Reservations = dynamic(() => import('@/components/userProfile/Reservations
     loading: () => <LoaderSpin />,
   });
 
-    let dynamicWindow;
+  let dynamicWindow;
 
 
 export default function page() {
